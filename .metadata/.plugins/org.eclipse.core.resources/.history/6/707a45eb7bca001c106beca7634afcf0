@@ -1,0 +1,68 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#define NUMBER_OF_Interrupt 1000
+
+unsigned char tick = 0;
+unsigned char SEC0 = 0;
+unsigned char SEC1 = 0;
+ISR(TIMER1_COMPA_vect)
+{
+	tick++;
+	if(tick == 10)
+	{
+		PORTC &= 0xF0;
+		SEC0 = 0;
+		tick = 0;
+		SEC1++;
+	}
+	else
+	{
+		SEC0++;
+		PORTC = (PORTC & 0xF0) | (SEC0 & 0x0F);
+	}
+}
+
+void Timer1_CTC_Square_Wave_Init(void)
+{
+	TCNT1 = 0; // set Timer1 initial value to zero
+
+	OCR1A = NUMBER_OF_Interrupt; //set compare value to 1000
+
+	TIMSK |= (1<<OCIE1A); //Compare A interrupt enable
+
+	TCCR1A = (1<<FOC1A); // 1- Force output compare for channel A
+
+
+	TCCR1B = (1<<WGM12) | (1<<CS10) |(1<<CS12); //2- CLK/1 .. CTC mode WGM12
+}
+
+
+
+int main(void)
+{
+	DDRC |= 0x0F;
+	PORTC = 0xf0;
+
+	DDRA |= 0x3F;
+
+	SREG|=(1<<7); //Enable global interrupt
+
+	Timer1_CTC_Square_Wave_Init(); //start timer1
+
+	while(1)
+	{
+		PORTA |= (1<<PA0);
+		_delay_us(50);
+		PORTA &= ~(1<<PA0);
+		_delay_us(50);
+		/*PORTA |= (1<<PA1);
+		_delay_us(2);
+		PORTC = (PORTC & 0xF0) | (SEC1 & 0x0F);
+		PORTA &= ~(1<<PA1);
+		_delay_us(2);
+		*/
+
+
+	}
+}
