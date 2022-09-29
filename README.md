@@ -9,7 +9,5 @@
  <li>Reset button</li>
  </ul>
  Every button work by using the Atmega16 to interrupt and change values.<br>
-#embeddedsystems #learning #project #MT #embeddedC
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0CZLzkZP0Wc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+#embeddedsystems #learning #project #MT #embeddedC<br>
+[![Embedded-diploma-MT-project-1](https://img.youtube.com/vi/0CZLzkZP0Wc)](https://www.youtube.com/watch?v=0CZLzkZP0Wc)
