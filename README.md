@@ -1,4 +1,4 @@
-# MT Embedded diploma project 1 Stop watch
+# MT Embedded diploma project 1 (Stop watch)
 ## Description
  Simple stop watch simulated in proteus using at atmega16 avr and programmed using embedded C <br>
   ## Goals
